@@ -1,1 +1,2 @@
-outputs/vcoco_train.tsv
+outputs/*_train.tsv
+outputs/*_test.tsv
