@@ -21,7 +21,9 @@ for line in fp:
     
 fp.seek(lineid_to_offset[args.image_num])
 image_id, image, label = fp.readline().rstrip("\n").split("\t")
+
 image = Image.open(BytesIO(base64.urlsafe_b64decode(image))).convert("RGB")
+
 draw = ImageDraw.Draw(image)
 w, h = image.size
 
@@ -32,12 +34,11 @@ for label in label_list:
     x0, y0, x1, y1 = float(x0), float(y0), float(x1), float(y1)
     boxes_target["boxes"].append([x0, y0, x1, y1])
     boxes_target["labels"].append(cat)
-    boxes_target["area"].append((x0, y0, x1, y1))
     
     draw.rectangle((x0, y0, x1, y1), outline="red")
-    # text_width, text_height = draw.textsize(cat)
     bbox = draw.textbbox((x0, y0), cat)
     draw.rectangle((bbox[0], bbox[1]-bbox[3]+bbox[1], bbox[2], bbox[1]), fill="red")
     draw.text((x0, y0-bbox[3]+bbox[1]), cat, fill="white")
+    
 # print(boxes_target)
 image.save(os.path.join(args.output_dir, f'{args.image_num}.png'))
