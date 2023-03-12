@@ -2,6 +2,7 @@ import argparse
 from io import BytesIO
 import base64
 from dataset.hico import build
+from tqdm import tqdm
 
 parser = argparse.ArgumentParser(description="hico")
 parser.add_argument('--num_queries', default=100, type=int, help="Number of query slots")
@@ -16,7 +17,7 @@ def to_tsv(mode='train'):
     print(mode, len(dataset))
 
     targets = ""
-    for i, (img, anno) in enumerate(dataset):
+    for i, (img, anno) in enumerate(tqdm(dataset, desc="Roading dataset")):
         target = f"{i+1}\t"
         
         hois = anno["hois"]
@@ -51,7 +52,10 @@ def to_tsv(mode='train'):
         targets += target
 
     out_path = f"outputs/hico-det_{mode}.tsv"
+    
+    print(f'writing to {out_path}...')
     with open(out_path, "w", encoding='utf-8') as f:
         f.write(targets)
+    print('done')
         
 to_tsv(args.mode)
