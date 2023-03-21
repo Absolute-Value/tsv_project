@@ -1,6 +1,5 @@
 # tsv
 [![Python][Python.js]][Python.link]
-[![PyTorch][PyTorch.js]][PyTorch.link]
 
 OFAでFinetuningするために、HICO-DETとV-COCOをtsvにします
 
@@ -18,5 +17,3 @@ tsvから読み込んだ画像とアノテーションの可視化
 <!-- MARKDOWN LINKS & IMAGES -->
 [Python.js]: https://img.shields.io/badge/Python-3572A5?style=for-the-badge&logo=Python&logoColor=white
 [Python.link]: https://www.python.org/
-[PyTorch.js]: https://img.shields.io/badge/PyTorch-e34c26?style=for-the-badge&logo=PyTorch&logoColor=white
-[PyTorch.link]: https://www.pytorch.org/
