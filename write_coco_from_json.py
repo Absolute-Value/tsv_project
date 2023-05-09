@@ -43,6 +43,9 @@ class GetCOCO():
             base64_str = base64_str.decode("utf-8") # str
             output = f"{i+1}\t{base64_str}\t"
             
+            if len(targets)==0:
+                continue
+            
             for target in targets:
                 cat_id = target['category_id']
                 cat_name = coco.cats[cat_id]['name']
