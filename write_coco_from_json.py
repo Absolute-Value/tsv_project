@@ -55,7 +55,7 @@ class GetCOCO():
             
             outputs += output
         
-        out_path = f"outputs/hico-det_{self.mode}.tsv"
+        out_path = f"outputs/coco_{self.mode}.tsv"
         print(f'writing to {out_path}...')
         with open(out_path, "w", encoding='utf-8') as f:
             f.write(outputs)
