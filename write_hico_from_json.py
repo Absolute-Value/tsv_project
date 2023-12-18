@@ -1,3 +1,4 @@
+import os
 import argparse
 from io import BytesIO
 import base64
@@ -7,6 +8,7 @@ from tqdm import tqdm
 parser = argparse.ArgumentParser(description="hico")
 parser.add_argument('--num_queries', default=100, type=int, help="Number of query slots")
 parser.add_argument("--data_path", default="/data/dataset/HICO-DET/", type=str)
+parser.add_argument("--output_dir", default="/local/hico-test/", type=str)
 parser.add_argument("--mode", default="train", type=str)
 args = parser.parse_args()
 
@@ -51,11 +53,11 @@ def to_tsv(mode='train'):
         
         targets += target
 
-    out_path = f"outputs/hico-det_{mode}.tsv"
-    
+    out_path = os.path.join(args.output_dir, f"hico-det_{mode}.tsv")
     print(f'writing to {out_path}...')
     with open(out_path, "w", encoding='utf-8') as f:
         f.write(targets)
     print('done')
         
+os.makedirs(args.output_dir, exist_ok=True)
 to_tsv(args.mode)
